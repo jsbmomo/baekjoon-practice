@@ -1,6 +1,5 @@
 package codingTest.baekjoon;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 

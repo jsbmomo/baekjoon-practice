@@ -6,16 +6,18 @@ public class bj_11005 {
   public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringBuilder str = new StringBuilder();
-    int value = Integer.parseInt(br.readLine());
-    int notation = Integer.parseInt(br.readLine());
+    String[] strs = br.readLine().split(" ");
+    int value = Integer.parseInt(strs[0]);
+    int notation = Integer.parseInt(strs[1]);
 
     while (value > 0) {
       int remain = value % notation;
       
+      System.out.println("hi");
       if (remain >= 10) {
-        str.append((char) (remain - 10));
+        str.append((char) (remain - 10 + 'A'));
       } else {
-        str.append((char) remain);    
+        str.append((char) (remain + '0'));    
       }
       
       value /= notation;

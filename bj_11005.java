@@ -13,7 +13,6 @@ public class bj_11005 {
     while (value > 0) {
       int remain = value % notation;
       
-      System.out.println("hi");
       if (remain >= 10) {
         str.append((char) (remain - 10 + 'A'));
       } else {

@@ -10,28 +10,25 @@ public class bj_10820 {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-    int line = Integer.parseInt(br.readLine());
-    int[][] cnt = new int[line][4];
+    String input = "";
 
-    for (int i = 0; i < line; i++) {
-      String input = br.readLine();
-      
+    while ((input = br.readLine()) != null) {
+      int[] cnt = new int[4];
+
       for (int j = 0; j < input.length(); j++) {
         if (input.charAt(j) >= 'a' && input.charAt(j) <= 'z') {
-          cnt[i][0]++;
+          cnt[0]++;
         } else if (input.charAt(j) >= 'A' && input.charAt(j) <= 'Z') {
-          cnt[i][1]++;
+          cnt[1]++;
         } else if (input.charAt(j) >= '0' && input.charAt(j) <= '9') {
-          cnt[i][2]++;
+          cnt[2]++;
         } else if (input.charAt(j) == ' ') {
-          cnt[i][3]++;
+          cnt[3]++;
         }
       }
-    }
 
-    for (int w = 0; w < line; w++) {
-      for (int z = 0; z < cnt[w].length; z++) {
-        bw.write(cnt[w][z] + " ");
+      for (int z = 0; z < cnt.length; z++) {
+        bw.write(cnt[z] + " ");
       }
       bw.write("\n");
     }

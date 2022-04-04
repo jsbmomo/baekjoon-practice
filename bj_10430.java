@@ -1,5 +1,3 @@
-package codingTest.baekjoon;
-
 import java.util.Scanner;
 
 public class bj_10430 {

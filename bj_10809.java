@@ -1,5 +1,3 @@
-package codingTest.baekjoon;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -13,6 +11,7 @@ public class bj_10809 {
     int[] position = {
       -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
     };
+    
     boolean[] judge = new boolean[26];
     int len = str.length();
     int counter = 0;

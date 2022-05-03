@@ -15,9 +15,11 @@ public class bj_2745 {
       char c = str.charAt(i);
 
       if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z') {
-        result += (Math.pow(binary, i) * ((c - 'A') + 10));
+        // result += (Math.pow(binary, i) * ((c - 'A') + 10));
+        result = result * binary + (c - 'A' + 10);
       } else {
-        result += (Math.pow(binary, i) * (c - '0'));
+        // result += (Math.pow(binary, i) * (c - '0'));
+        result = result * binary + (c - '0');
       }
     }
 

@@ -3,29 +3,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class bj_2133 {
-
-  static int[] tile = new int[1001];
+  
+  private static int[] tile;
 
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int count = Integer.parseInt(br.readLine());
 
-    System.out.println(dp(count));
-  }
+    tile = new int[count + 1];
+    if (count % 2 == 0) {
+        tile[0] = 1;
+        tile[2] = 3;
+        for (int i = 4; i <= count; i += 2) {
+            tile[i] = tile[i - 2] * tile[2];
 
-  public static int dp(int count) {
-    if (count == 0) return 1;
-    if (count == 1) return 0;
-    if (count == 2) return 3;
-    if (tile[count] != 0) return tile[count];
-    int result = 3 * dp(count - 2);
-
-    for (int i = 3; i <= count; i++) {
-      if (i % 2 == 0) {
-        result += 2 * tile[count - i];
-      }
+            for (int j = i - 4; j >= 0; j -= 2) {
+                tile[i] += (tile[j] * 2);
+            }
+        }
     }
 
-    return tile[count] = result;
+    System.out.println(count % 2 == 0 ? tile[count] : 0);
   }
 }

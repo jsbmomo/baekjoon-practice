@@ -26,25 +26,28 @@ public class bj_10819 {
     
     sum = 0;
     max = 0;
+    int cnt = 0;
     for (int i = 0; i < count; i++) { // 배열의 개수만큼 반복한다.
-      for (int j = count - 2; j >= 0; j--) {  // 맨 뒤에서부터 2칸 앞을 기준(j)으로 잡고,
+      for (int j = count - 3; j >= 0; j--) {  // 맨 뒤에서부터 2칸 앞을 기준(j)으로 잡고,
         for (int z = 0; z < (count - 1) - j; z++) { // 맨 뒤에서부터 j까지 차례로 위치교환을 하며
-          temp = values[(count - 1) - z];
-          values[(count - 1) - z] = values[j];
-          values[j] = temp;
-
-          for (int e = 0; e < count - 2; e++) { // 일일이 공식을 적용하여 최대값을 찾는다.  
-            sum += Math.abs(values[i] - values[i + 1]);
+          for (int e = 0; e < count - 1; e++) { // 일일이 공식을 적용하여 최대값을 찾는다.  
+            sum += Math.abs(values[e] - values[e + 1]);
           }
           
           if (max < sum) {
             max = sum;
           }
           sum = 0;
+          cnt++;
+
+          temp = values[(count - 1) - z];
+          values[(count - 1) - z] = values[(count - 2) - z];
+          values[(count - 2) - z] = temp;
         }
       }
     }
     System.out.println(max);
+    System.out.println(cnt);
 
     sc.close();
   }

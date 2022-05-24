@@ -8,25 +8,28 @@ public class bj_1439 {
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    String[] arr = br.readLine().split("");
+    String input = br.readLine();
 
-		int countOne = 0;
-		int countZero = 0;
+		int one = 0;
+		int zero = 0;
 
-		if(arr[0].equals("0")) {
-      countZero++;
+		if(input.charAt(0) == '0') {
+      zero++;
     } else {
-      countOne++;
+      one++;
     }
 
-		for(int i = 1; i<arr.length; i++) {
-			if(!arr[i-1].equals(arr[i])) {
-				if(arr[i].equals("0")) countZero++;
-				else countOne++;
-			}
+		for(int i = 1; i < input.length(); i++) {
+      if (input.charAt(i - 1) != input.charAt(i)) {
+        if (input.charAt(i) == '0') {
+          zero++;
+        } else {
+          one++;
+        }
+      }
 		}
 	
-    bw.append(Math.min(countZero, countOne) + "\n");
+    bw.append((zero < one ? zero : one) + "\n");
     bw.flush();
     bw.close();
     br.close();

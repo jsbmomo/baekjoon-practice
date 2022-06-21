@@ -10,27 +10,19 @@ public class bj_1373 {
  */
   public static void main(String[] args) {
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-      String binary = br.readLine();
-      int position = 1;
-      int result = 0;
-    
-      int temp = 0;
-      int pointer = 1;
-      System.out.println(binary.length());
-      for (int idx = binary.length() - 1; idx > 0; idx--) {
-        if (binary.charAt(idx) == '1') {
-          temp += position;
-        } 
-        if ((idx + 1) % 3 == 0) {
-          result += temp * pointer;
-          position = 1;
-          pointer *= 10;
-        } else {
-          position *= 2;
-        }
+      StringBuilder sb = new StringBuilder();
+      String N = br.readLine();
+
+      if (N.length() % 3 == 1)
+        sb.append(N.charAt(0));
+      if (N.length() % 3 == 2)
+        sb.append((N.charAt(0) - '0') * 2 + (N.charAt(1) - '0');
+      
+      for (int i = N.length() % 3; i< N.length(); i += 3) {
+        sb.append((N.charAt(i) - '0') * 4 + (N.charAt(i + 1) - '0') * 2 + (N.charAt(i + 2) - '0'));
       }
 
-      System.out.println(result);
+      System.out.println(sb);
     } catch (IOException ex) {
       // BufferedReader 사용 시, IOException 필요
     }

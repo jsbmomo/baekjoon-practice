@@ -10,16 +10,23 @@ public class bj_10872 {
   public static void main(String[] args) {
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       int input = Integer.parseInt(br.readLine());
-      System.out.println(factorial(input));
+      int result = 1;
+
+      for (int i = 1; i <=input; i++) {
+        result *= i;
+      }
+
+      System.out.println(result);
     } catch (IOException ex) {
       ex.printStackTrace();
     }
   }
 
-  public static int factorial(int value) {
-    if (value == 0) {
-      return 1;
-    }
-    return value * factorial(--value);
-  }
+  /* Use Recursion Function */
+  // public static int factorial(int value) {
+  //   if (value == 0) {
+  //     return 1;
+  //   }
+  //   return value * factorial(--value);
+  // }
 }

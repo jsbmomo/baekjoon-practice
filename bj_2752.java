@@ -7,19 +7,18 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class bj_2752 {
-  static int[] input;
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     StringTokenizer st = new StringTokenizer(br.readLine());
-    input = new int[st.countTokens()];
+    int[] input = new int[st.countTokens()];
     
     for (int i = 0; i < input.length; i++) {
       input[i] = Integer.parseInt(st.nextToken());
     }
     
     // Arrays.sort(input);
-    quickSort(input, input[0], input[input.length - 1]);
+    quickSort(input, 0, input.length - 1);
 
     for (int val : input) {
       bw.append(val + " ");

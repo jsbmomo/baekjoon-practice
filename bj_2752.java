@@ -3,10 +3,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class bj_2752 {
+
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -27,6 +28,8 @@ public class bj_2752 {
     bw.flush();
     bw.close();
     br.close();
+
+    Stack
   }
 
   public static void quickSort(int[] ary, int first, int last) {
@@ -66,5 +69,48 @@ public class bj_2752 {
     int tmp = ary[b];
     ary[b] = ary[a];
     ary[a] = tmp;
+  }
+}
+
+
+class IntStack {
+  private int[] stack;
+  private int pointer;
+  private int max;
+
+  public IntStack(int capacity) {
+    pointer = 0;
+    max = capacity;
+    stack = new int[max];
+  }
+
+  public int pop() {
+    if (pointer <= 0) System.out.println("스택에 남아있는 데이터가가 없습니다.");
+    return stack[pointer - 1];
+  }
+
+  public int peek(int search) {
+    for (int i = pointer - 1; pointer >= 0; i--) {
+      if (stack[i] == search)
+        return i;
+    }
+    return -1;
+  }
+
+  public int push(int data) {
+    if (pointer >= max) System.out.println("스택이 가득 찼습니다.");
+    return stack[pointer++] = data;
+  }
+
+  public void clear() {
+    pointer = 0;
+  }
+
+  public int size() {
+    return pointer;
+  }
+
+  public void clear() {
+    pointer = 0;
   }
 }

@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class bj_2752 {
@@ -17,9 +16,11 @@ public class bj_2752 {
     for (int i = 0; i < input.length; i++) {
       input[i] = Integer.parseInt(st.nextToken());
     }
+
+    int[] input2 = {2,39,14,10,12,9,45,16,35,26,38,4,6,15,23,41,50,48,66,43};
     
     // Arrays.sort(input);
-    quickSort(input, 0, input.length - 1);
+    quickSort(input2, 0, input2.length - 1);
 
     for (int val : input) {
       bw.append(val + " ");
@@ -28,41 +29,48 @@ public class bj_2752 {
     bw.flush();
     bw.close();
     br.close();
-
-    Stack
   }
 
-  public static void quickSort(int[] ary, int first, int last) {
-    if (first >= last) {
-      return ;
-    }
+  public static void quickSort(int[] ary, int left, int right) {
+    IntStack lStack = new IntStack(right - left + 1);
+    IntStack rStack = new IntStack(right - left + 1);
 
-    int pi = partition(ary, first, last);
+    lStack.push(left);
+    rStack.push(right);
 
-    quickSort(ary, first, pi - 1);
-    quickSort(ary, pi + 1, last);
-  }
+    int counter = 1;
 
-  public static int partition(int[] ary, int first, int last) {
-    int pivot = ary[first];
-    int i = first, j = last;
+    while (!lStack.isEmpty()) {
+      int pointerLeft = left = lStack.pop();
+      int pointerRight = right = rStack.pop();
+      int pivot = ary[(left + right) / 2];
 
-    while (i < j) {
-      while (pivot < ary[j]) {
-        j--;
+      do {
+        while (ary[pointerLeft] < pivot) {
+          System.out.println("Loop : " + counter + " / " + ary[pointerLeft] + " / " + pivot);
+          pointerLeft++;
+        }
+        while (ary[pointerRight] > pivot) {
+          pointerRight--;
+        }
+
+        if (pointerLeft <= pointerRight) {
+          swap(ary, pointerLeft++, pointerRight--);
+        }
+      } while (pointerLeft <= pointerRight);
+
+      if (left < pointerRight) {
+        lStack.push(left);
+        rStack.push(pointerRight);
       }
 
-      while (i < j && pivot >= ary[i]) {
-        i++;
+      if (pointerRight < right) {
+        lStack.push(pointerLeft);
+        rStack.push(right);
       }
 
-      swap(ary, i, j);
+      counter++;
     }
-
-    ary[first] = ary[i];
-    ary[i] = pivot;
-
-    return i;
   }
 
   public static void swap(int[] ary, int a, int b) {
@@ -85,7 +93,7 @@ class IntStack {
   }
 
   public int pop() {
-    if (pointer <= 0) System.out.println("스택에 남아있는 데이터가가 없습니다.");
+    if (pointer <= 0) throw new EmptyIntStackException("The stack is Empty !!!");
     return stack[pointer - 1];
   }
 
@@ -98,7 +106,7 @@ class IntStack {
   }
 
   public int push(int data) {
-    if (pointer >= max) System.out.println("스택이 가득 찼습니다.");
+    if (pointer >= max) throw new OverflowIntStackException("The stack is Full !!!");
     return stack[pointer++] = data;
   }
 
@@ -110,7 +118,21 @@ class IntStack {
     return pointer;
   }
 
-  public void clear() {
-    pointer = 0;
+  public boolean isEmpty() {
+    return pointer == 0 ? true : false;
+  }
+
+  public class EmptyIntStackException extends RuntimeException {
+    public EmptyIntStackException() {}
+    public EmptyIntStackException(String message) {
+      super(message);
+    }
+  }
+
+  public class OverflowIntStackException extends RuntimeException {
+    public OverflowIntStackException() {}
+    public OverflowIntStackException(String message) {
+      super(message);
+    }
   }
 }

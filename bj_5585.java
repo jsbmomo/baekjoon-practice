@@ -35,6 +35,20 @@ public class bj_5585 {
       }
     }
 
+    index = 0;
+    count = 0;
+    change = 1000 - pay;
+
+    while (change > 0) {
+      int temp = change / jpy[index];
+      System.out.println(temp);
+      count += temp;
+      System.out.println(temp * jpy[index]);
+      change -= temp * jpy[index];
+      System.out.println(change);
+      index++;
+    } 
+
     System.out.println(count);
   }
 }

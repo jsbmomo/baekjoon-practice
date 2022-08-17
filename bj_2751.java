@@ -28,10 +28,17 @@ N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로�
       ary[i] = Integer.parseInt(br.readLine());
     }
 
+    for (int value : ary) {
+      sb.append(value);
+    }
+
+    System.out.println(sb);
+    sb.delete(0, count);
+
     quickSort(ary, ary[0], ary[count - 1]);
 
     for (int value : ary) {
-      sb.append(value + ' ');
+      sb.append(value);
     }
 
     // method 1.

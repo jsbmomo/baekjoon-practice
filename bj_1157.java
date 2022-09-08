@@ -4,46 +4,36 @@ import java.io.InputStreamReader;
 
 public class bj_1157 {
 
-  static int[] count = new int[52];
+  static int[] count = new int[26];
 
   public static void main(String[] args) throws IOException {
+    // 백준에서 BufferedReader 를 사용한 문자열 입력 시, error 발생
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String word = br.readLine();
+    word = word.substring(0, word.length() - 1);
     
     for (int i = 0; i < word.length(); i++) {
       if ('A' <= word.charAt(i) && 'Z' >= word.charAt(i)) {
-        System.out.println(word.charAt(i) - 'A');
         count[word.charAt(i) - 'A']++;
-        continue;
-      }
-
-      if ('a' <= word.charAt(i) && 'z' >= word.charAt(i)) {
-        System.out.println(word.charAt(i) - 'a');
-        count[word.charAt(i) - 'a' + 26]++;
-        continue;
+      } else {
+        count[word.charAt(i) - 'a']++;
       }
     }
 
-    int index = 0;
-    boolean duplicate = false;
-    for (int c = 1; c < count.length; c++) {
-      if (count[c] != 0 && count[c] == count[index]) {
-        duplicate = true;
-        break;
-      }
-
-      if (count[c] > count[index]) {
-        index = c;
+    int value = 0;
+    char result = '?';
+    
+    for (int c = 0; c < count.length; c++) {
+      if (count[c] > value) {
+        value = count[c];
+        result = (char) (c + 'A');
+      } else if (count[c] == value) {
+        result = '?';
       }
     }
 
-    if (duplicate) System.out.println("?");
-    else System.out.println((char) index + 'A');
+    System.out.print(result);
 
     br.close();
-  }
-
-  public static void print(Object val) {
-    System.out.println(val.toString());
   }
 }

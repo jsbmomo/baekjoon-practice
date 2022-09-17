@@ -9,21 +9,20 @@ public class bj_1292 {
     int a = Integer.parseInt(input[0]);
     int b = Integer.parseInt(input[1]);
     
-    int sum = 0, value = 0, index = 0;
-    
+    int sum = 0, value = 0, index = 1;
+
     while (true) {
-      index++; // 현재 출력 중인 정수 순서
       value++; // 출력될 정수
 
       for (int j = 0; j < value; j++) {
-        if (index >= a && b <= index) {
+        if (a <= index && index <= b) {
           sum += value;
         }
-        index++;
+        index++; // 현재 출력 중인 정수 순서
       }
       
 
-      if (index >= b) break;
+      if (index > b) break;
     }
 
     System.out.println(sum);

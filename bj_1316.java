@@ -14,30 +14,31 @@ public class bj_1316 {
     }
 
     for (int i = 0; i < count; i++) {
-      if (words[i].length() == 1) {
+      if (words[i].length() <= 2) {
         result++;
         continue;
       }
 
-      int[] alphabet = new int[26];
-      char before = '1';
-      for (int j = 0; j < words[i].length(); j++) {
-        alphabet[words[i].charAt(j) - 97]++; // 체크 (증가)
+      boolean isGroupWord = true;
+      boolean[] alphabet = new boolean[26];
 
-         // 이전 알파벳과 같다면 (알파벳이 연속해서 나왔다면)
-        if (before == words[i].charAt(j)) continue;
+      alphabet[words[i].charAt(0) - 97] = true; // 첫 번째 알파벳 체크
+      for (int j = 1; j < words[i].length(); j++) {  
+
+        // 이전에 나온 알파벳과 같은지 비교한다.
+        if (words[i].charAt(j - 1) == words[i].charAt(j)) continue;
         
-        // 이전 알파벳과 같지 않은데 기록한 흔적이 있다면
-        if (words[i].charAt(j) != 0) {
-          before = '0';
+        // 알파벳을 이전에 기록한 흔적이 있다면 break.
+        if (alphabet[words[i].charAt(j) - 97]) {
+          isGroupWord = false;
           break;
         }
-
-        // 이전 알파벳과 다르고, 이전에 기록한 흔적이 없다면
-        before = words[i].charAt(j);
+        
+        // words[i].charAt(j) 으로 나온 알파벳 체크
+        alphabet[words[i].charAt(j) - 97] = true;
       }
 
-      if (before != '0') result++;
+      if (isGroupWord) result++;
     }
 
     System.out.println(result);

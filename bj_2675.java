@@ -5,33 +5,43 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class bj_2675 {
+  static BufferedReader br;
+  static BufferedWriter bw;
+  static int count;
+  static int repeatCount;
+  static String repeatStr;
+  static StringBuilder sb;
+  static String[] input;
+  static char[] strToChar;
+
   public static void main(String[] args) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    int count = Integer.parseInt(br.readLine());
-
-    int[] repeatCount = new int[count];
-    String[] repeatStr = new String[count];
+    br = new BufferedReader(new InputStreamReader(System.in));
+    bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    count = Integer.parseInt(br.readLine());
+    sb = new StringBuilder();
 
     for (int i = 0; i < count; i++) {
-      String[] input = br.readLine().split(" ");
-      repeatCount[i] = Integer.parseInt(input[0]);
-      repeatStr[i] = input[1];
-    }
+      input = br.readLine().split(" ");
+      repeatCount = Integer.parseInt(input[0]);
+      repeatStr = input[1];
 
-    StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < count; i++) {
-      for (int j = 0; j < repeatStr[i].length(); j++) {
-        for (int z = 0; z < repeatCount[i]; z++) {
-          sb.append(repeatStr[i].charAt(j));
-        }
-      }
-      sb.append("\n");
+      repeat();
     }
 
     bw.append(sb.toString());
     bw.flush();
     bw.close();
     br.close();
+  }
+
+  static void repeat() {
+    strToChar = repeatStr.toCharArray();
+
+    for (int j = 0; j < strToChar.length; j++) {
+      for (int z = 0; z < repeatCount; z++) {
+        sb.append(strToChar[j]);
+      }
+    }
+    sb.append("\n");
   }
 }

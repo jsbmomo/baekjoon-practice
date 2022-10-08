@@ -16,7 +16,6 @@ public class bj_1924 {
 
     for (int i = 1; i < inputMonth; i++) {
       day += month[i];
-      System.out.println("1");
     }
     day += Integer.parseInt(st.nextToken());
 

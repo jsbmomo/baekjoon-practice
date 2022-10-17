@@ -6,10 +6,15 @@ public class bj_1550 {
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     char[] input = br.readLine().toCharArray();
+    int sum = 0;
+    int hex = 1;
 
-    for (int i = 0; i < input.length; i++) {
-      System.out.print(hexToDecimal(input[i]));
+    for (int i = input.length - 1; i >= 0; i--) {
+      sum += hexToDecimal(input[i]) * hex;
+      hex *= 16;
     }
+
+    System.out.println(sum);
   }
 
   public static int hexToDecimal(char c) {

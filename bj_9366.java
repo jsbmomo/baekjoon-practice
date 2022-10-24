@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 
 public class bj_9366 {
   public static void main(String[] args) throws IOException {
@@ -17,27 +18,26 @@ public class bj_9366 {
       for (String s : br.readLine().split(" ")) {
         triangle[i][j++] = Integer.parseInt(s);
       }
+      Arrays.sort(triangle[i]);
     }
 
     StringBuilder sb = new StringBuilder();
     int caseNum = 1;
     for (int[] t : triangle) {
-      if ((t[0] == t[1]) && (t[1] == t[2])) {
-        sb.append("Case #" + caseNum + ": equilateral\n");
-      } else if (
-        (t[0] == t[1]) || (t[1] == t[2]) || (t[0] == t[2])
-      ) {
-        sb.append("Case #" + caseNum + ": isosceles\n");
-      } else if (
-        (t[0] != t[1]) && (t[1] != t[2]) && (t[0] != t[2])
-      ) {
-        sb.append("Case #" + caseNum + ": scalene\n");
-      } else {
+      if ((t[0] + t[1]) <= t[2]) {
         sb.append("Case #" + caseNum + ": invalid!\n");
+      } else if ((t[0] == t[1]) && (t[1] == t[2])) {
+        sb.append("Case #" + caseNum + ": equilateral\n");
+      } else if ((t[0] == t[1]) || (t[0] == t[2]) || (t[1] == t[2])) {
+        sb.append("Case #" + caseNum + ": isosceles\n");
+      } else {
+        sb.append("Case #" + caseNum + ": scalene\n");
       }
+      caseNum++;
     }
 
     bw.append(sb.toString());
+    bw.flush();
     bw.close();
     br.close();
   }

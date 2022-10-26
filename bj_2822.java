@@ -28,7 +28,7 @@ public class bj_2822 {
 
     for (int i = 0; i < quiz; i++) {
       for (int j = 3; j < quiz; j++) {
-        if (num[i] == max[i]) {
+        if (num[i] == max[j]) {
           bw.append(i + 1 + " ");
         }
       }

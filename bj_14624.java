@@ -24,10 +24,10 @@ public class bj_14624 {
 
     int line = (int) Math.ceil((double)input / 2);
     int last = line - 1;
-    int space = 0;
+    int space = -1;
     for (int i = 0; i < line; i++) {
       for (int j = 0; j < last; j++) {
-        if (space != 0 && j == space) {
+        if (space >= 0 && j == space) {
           sb.append('*');
         } else {
           sb.append(' ');
@@ -35,7 +35,8 @@ public class bj_14624 {
       }
       sb.append("*\n");
       last++;
-      space = last - (i + 2);
+      space = last - ((i + 1) * 2);
+      System.out.println(space);
     }
 
     bw.append(sb.toString());

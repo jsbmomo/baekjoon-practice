@@ -8,6 +8,7 @@ public class bj_17072 {
   static BufferedReader br = null;
   static BufferedWriter bw = null;
   static StringBuilder sb = null;
+  static int r, g, b, multiply;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,15 +16,16 @@ public class bj_17072 {
     sb = new StringBuilder();
 
     String[] range = br.readLine().split(" ");
+    
 
     for (int i = 0; i < Integer.parseInt(range[0]); i++) {
       String[] line = br.readLine().split(" ");
 
       for (int j = 0; j < line.length; j += 3) {
-        int r = Integer.parseInt(line[j]);
-        int g = Integer.parseInt(line[j + 1]);
-        int b = Integer.parseInt(line[j + 2]);
-        int multiply = intensityFunction(r, g, b);
+        r = Integer.parseInt(line[j]);
+        g = Integer.parseInt(line[j + 1]);
+        b = Integer.parseInt(line[j + 2]);
+        multiply = intensityFunction(r, g, b);
 
         sb.append(findAsciiCode(multiply));
       }

@@ -8,29 +8,24 @@ public class bj_17202 {
     String a = br.readLine();
     String b = br.readLine();
 
-    StringBuilder sb = new StringBuilder();
+    StringBuilder currentStr = new StringBuilder();
 
     for (int i = 0; i < a.length(); i++) {
-      sb.append(a.charAt(i)).append(b.charAt(i));
+      currentStr.append(a.charAt(i)).append(b.charAt(i));
     }
 
-    String result = sb.toString();
-    int len = sb.length();
+    StringBuilder result = currentStr;
+    int len = currentStr.length();
 
-    StringBuilder beforeStr;
-    StringBuilder currentStr;
-
-    while (len > 2) {
-      beforeStr = new StringBuilder(result);
+    while (len-- > 2) {
       currentStr = new StringBuilder();
       
-      for (int i = 0; i < len - 1; i++) {
-        int v = ((beforeStr.charAt(i) - '0') + (beforeStr.charAt(i + 1) - '0')) % 10;
+      for (int i = 0; i < len; i++) {
+        int v = ((result.charAt(i) - '0') + (result.charAt(i + 1) - '0')) % 10;
         currentStr.append(v);
       }
       
-      result = currentStr.toString();
-      len--;
+      result = currentStr;
     }
     
     System.out.println(result);

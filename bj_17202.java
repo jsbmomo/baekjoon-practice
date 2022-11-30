@@ -14,19 +14,25 @@ public class bj_17202 {
       sb.append(a.charAt(i)).append(b.charAt(i));
     }
 
-    while (true) {
-      StringBuilder tempSb = new StringBuilder();
+    String result = sb.toString();
+    int len = sb.length();
 
-      if ((sb.length() - 2) < 1) break;
+    StringBuilder beforeStr;
+    StringBuilder currentStr;
 
-      for (int i = 0; i < sb.length() - 2; i++) {
-        int v = ((sb.charAt(i) - '0') + (sb.charAt(i + 1) - '0')) % 10;
-        tempSb.append((char) v);
+    while (len > 2) {
+      beforeStr = new StringBuilder(result);
+      currentStr = new StringBuilder();
+      
+      for (int i = 0; i < len - 1; i++) {
+        int v = ((beforeStr.charAt(i) - '0') + (beforeStr.charAt(i + 1) - '0')) % 10;
+        currentStr.append(v);
       }
       
-      sb = tempSb;
+      result = currentStr.toString();
+      len--;
     }
     
-    System.out.println(sb.toString());
+    System.out.println(result);
   }
 }

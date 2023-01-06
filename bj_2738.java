@@ -6,33 +6,21 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 public class bj_2738 {
+  static BufferedReader br;
+  static BufferedWriter bw;
+  static StringTokenizer st;
+
   public static void main(String[] args) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    br = new BufferedReader(new InputStreamReader(System.in));
+    bw = new BufferedWriter(new OutputStreamWriter(System.out));
     StringBuilder sb = new StringBuilder();
 
-    StringTokenizer st = new StringTokenizer(br.readLine());
+    st = new StringTokenizer(br.readLine());
     int N = Integer.parseInt(st.nextToken());
     int M = Integer.parseInt(st.nextToken());
 
-    int[][] aryFirst = new int[N][M];
-    int[][] arySecond = new int[N][M];
-
-    for (int[] rows : aryFirst) {
-      st = new StringTokenizer(br.readLine());
-
-      for (int i = 0; i < M; i++) {  
-        rows[i] = Integer.parseInt(st.nextToken());
-      }
-    }
-
-    for (int[] rows : arySecond) {
-      st = new StringTokenizer(br.readLine());
-
-      for (int i = 0; i < M; i++) {  
-        rows[i] = Integer.parseInt(st.nextToken());
-      }
-    }
+    int[][] aryFirst = getMatrixArrays(N, M);
+    int[][] arySecond = getMatrixArrays(N, M);
 
     for (int i = 0; i < N; i++) {
       for (int j = 0; j < M; j++) {
@@ -45,5 +33,19 @@ public class bj_2738 {
     bw.flush();
     bw.close();
     br.close();
+  }
+
+  private static int[][] getMatrixArrays(int rows, int columns) throws IOException {
+    int[][] matrix = new int[rows][columns];
+
+    for (int[] row : matrix) {
+      st = new StringTokenizer(br.readLine());
+
+      for (int i = 0; i < columns; i++) {
+        row[i] = Integer.parseInt(st.nextToken());
+      }
+    }
+
+    return matrix;
   }
 }

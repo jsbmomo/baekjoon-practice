@@ -49,9 +49,7 @@ public class bj_17298 {
     int stackCapacity = stack.size();
 
     for (int i = 1; i <= stackCapacity; i++) {
-      int stackTopValue = values[stack.peek()];
-
-      if (stackTopValue < currentValue) {
+      if (values[stack.peek()] < currentValue) {
         values[index - i] = currentValue;
         stack.pop();
       }
@@ -71,15 +69,15 @@ class CustomStack {
   }
 
   public void push(int value) {
-    values[++index] = value;
+    values[index++] = value;
   }
 
   public int pop() {
-    return values[index--];
+    return values[--index];
   }
 
   public int peek() {
-    return values[index];
+    return values[index - 1];
   }
 
   public int size() {
@@ -87,6 +85,6 @@ class CustomStack {
   }
 
   public boolean hasMoreElements() {
-    return index != 0 ? true : false;
+    return index != 0;
   }
 }

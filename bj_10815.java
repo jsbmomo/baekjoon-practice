@@ -9,30 +9,35 @@ public class bj_10815 {
   static int own;
   static int[] ownCards;
   static int card;
-  static int[] cards;
+
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     
     own = Integer.parseInt(br.readLine());
-    ownCards = inputCards(br.readLine(), own);
+    ownCards = inputOwnCards(br.readLine(), own);
   
     card = Integer.parseInt(br.readLine());
-    cards = inputCards(br.readLine(), card);
 
-    Arrays.sort(ownCards);
+    System.out.println(cardCheck(br.readLine(), card));
 
-    StringBuilder sb = new StringBuilder();
-    
-    for (int i = 0; i < card; i++) {
-      if (binarySearch(cards[i])) sb.append("1 ");
-      else sb.append("0 ");
-    }
-
-    System.out.println(sb.toString());
     br.close();
   }
 
-  static int[] inputCards(String input, int len) {
+  static String cardCheck(String input, int len) {
+    StringBuilder sb = new StringBuilder();
+    st = new StringTokenizer(input);
+        
+    for (int i = 0; i < card; i++) {
+      int cardValue = Integer.parseInt(st.nextToken());
+
+      if (binarySearch(cardValue)) sb.append("1 ");
+      else sb.append("0 ");
+    }
+
+    return sb.toString();
+  }
+
+  static int[] inputOwnCards(String input, int len) {
     int[] temp = new int[len];
     st = new StringTokenizer(input);
 
@@ -40,10 +45,12 @@ public class bj_10815 {
       temp[i] = Integer.parseInt(st.nextToken());
     }
 
+    Arrays.sort(temp);
+
     return temp;
   }
 
-  private static boolean binarySearch(int num) {
+  static boolean binarySearch(int num) {
     int leftIndex = 0;
     int rightIndex = own - 1;
 

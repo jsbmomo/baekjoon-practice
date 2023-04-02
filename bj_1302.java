@@ -22,25 +22,25 @@ public class bj_1302 {
 
   static String findMaxDuplicate(String[] inputs, int count) {
     String maxDuplicate = inputs[0];
-    String tempStr = inputs[0];
     int maxDuplicateCount = 1;
-    int tempCount = 0;
-    
-    if (count == 1) return maxDuplicate;
+
+    if (maxDuplicateCount == count) return maxDuplicate;
+
+    String tempStr = inputs[0];
+    int tempCount = 1;
 
     for (int i = 1; i < count; i++)  {
-      if (tempStr == inputs[i]) {
-        tempCount += 1;
-        continue;
+      if (!tempStr.equals(inputs[i])) {
+        tempStr = inputs[i];
+        tempCount = 0;
       }
+
+      tempCount += 1;
 
       if (tempCount > maxDuplicateCount) {
-        maxDuplicate = inputs[i];
+        maxDuplicate = tempStr;
         maxDuplicateCount = tempCount;
       }
-
-      tempStr = inputs[i];
-      tempCount = 1;
     }
 
     return maxDuplicate;

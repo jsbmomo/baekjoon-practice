@@ -26,11 +26,7 @@ public class bj_1236 {
     data = new char[row][col];
 
     for (int i = 0; i < row; i++) {
-      char[] line = br.readLine().toCharArray();
-
-      for (int j = 0; j < col; j++) {
-        data[i][j] = line[j];
-      }
+      data[i] = br.readLine().toCharArray();
     }
   }
 

@@ -31,33 +31,25 @@ public class bj_1236 {
   }
 
   static int checkNeedToGuard() {
-    int needCol = 0;
-    int needRow = 0;
+    int needCol = col;
+    int needRow = row;
 
     for (int i = 0; i < row; i++) {
-      boolean exist = false;
-
       for (int j = 0; j < col; j++) {
         if (data[i][j] == 'X') {
-          exist = true;
+          needRow -= 1;
           break;
         }
       }
-
-      if (!exist) needCol += 1;
     }
 
     for (int  i = 0; i < col; i++) {
-      boolean exist = false;
-
       for (int j = 0; j < row; j++) {
         if (data[j][i] == 'X') {
-          exist = true;
+          needCol -= 1;
           break;
         }
       }
-
-      if (!exist) needRow += 1;
     }
 
     return Math.max(needCol, needRow);

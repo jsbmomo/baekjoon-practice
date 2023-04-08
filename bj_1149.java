@@ -1,54 +1,64 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class bj_1149 {
-	final static int Red = 0;
-	final static int Green = 1;
-	final static int Blue = 2;
-	
-	static int[][] Cost;
-	static int[][] DP;
-	
-	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
+	static BufferedReader br;
+	static int[][] house;
+	static int count;
+
+	public static void main(String[] args) throws IOException {
+		br = new BufferedReader(new InputStreamReader(System.in));
+		count = Integer.parseInt(br.readLine());
 		
-		int N = in.nextInt();
-        
-		Cost = new int[N][3];
-		DP = new int[N][3];
-		
-		for(int i = 0; i < N; i++) {
-			Cost[i][Red] = in.nextInt();
-			Cost[i][Green] = in.nextInt();
-			Cost[i][Blue] = in.nextInt();
-		}
-		
-		// DP의 첫번째 값(집)은 각 색상비용의 첫번째 값으로 초기화
-		DP[0][Red] = Cost[0][Red];
-		DP[0][Green] = Cost[0][Green];
-		DP[0][Blue] = Cost[0][Blue];
-		
-		
-		System.out.print(Math.min(Paint_cost(N- 1, Red), Math.min(Paint_cost(N - 1, Green), Paint_cost(N - 1, Blue))));
+		generateDataSet();
+
+		int cost1 = findMinimumValues(0);
+		int cost2 = findMinimumValues(1);
+		int cost3 = findMinimumValues(2);
+
+		System.out.println(cost1+cost2+cost3);
+
+		br.close();
 	}
-	
-	static int Paint_cost(int N, int color) {
-		
-		// 만약 탐색하지 않은 배열이라면
-		if(DP[N][color] == 0) {
-			
-			// color의 색에 따라 이전 집의 서로 다른 색을 재귀호출하여 최솟값과 현재 집의 비용을 더해서 DP에 저장한다
-			if(color == Red) {
-				DP[N][Red] = Math.min(Paint_cost(N - 1, Green), Paint_cost(N - 1, Blue)) + Cost[N][Red];
-			}
-			else if(color == Green) {
-				DP[N][Green] = Math.min(Paint_cost(N - 1, Red), Paint_cost(N - 1, Blue)) + Cost[N][Green];
-			}
-			else {
-				DP[N][Blue] = Math.min(Paint_cost(N - 1, Red), Paint_cost(N - 1, Green)) + Cost[N][Blue];
-			}
-			
+
+	static void generateDataSet() throws IOException {
+		StringTokenizer st = null;
+
+		house = new int[count][3];
+
+		for (int i = 0; i < count; i++) {
+			st = new StringTokenizer(br.readLine());
+			house[i][0] = Integer.parseInt(st.nextToken());
+			house[i][1] = Integer.parseInt(st.nextToken());
+			house[i][2] = Integer.parseInt(st.nextToken());
 		}
-		
-		return DP[N][color];
+	}
+
+	static int findMinimumValues(int startIndex) {
+		int sum = house[0][startIndex];
+		int deforeIndex = startIndex;
+
+		for (int i = 1; i < count; i++) {
+			if (deforeIndex == 0) {
+				deforeIndex = house[i][1] < house[i][2] ? 1 : 2;
+				sum += house[i][deforeIndex];
+				continue;
+			}
+
+			if (deforeIndex == 1) {
+				deforeIndex = house[i][0] < house[i][2] ? 0 : 2;
+				sum += house[i][deforeIndex];
+				continue;
+			}
+
+			if (deforeIndex == 2) {
+				deforeIndex = house[i][0] < house[i][1] ? 0 : 1;
+				sum += house[i][deforeIndex];
+			}
+		}
+
+		return sum;
 	}
 }

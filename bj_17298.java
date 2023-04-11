@@ -4,87 +4,88 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class bj_17298 {
+  static int size;
+  static int[] inputs;
   static BufferedReader br;
-  static StringBuilder sb;
   static StringTokenizer st;
-  static CustomStack stack;
-  static int[] values;
-  static int count;
-
-  public static void main(String[] args) throws IOException {
+  static StringBuilder sb;
+  
+  public static void main(String[] args) throws IOException {    
     br = new BufferedReader(new InputStreamReader(System.in));
 
-    count = Integer.parseInt(br.readLine());
-    values = new int[count];
-    stack = new CustomStack(count);
-
+    size = Integer.parseInt(br.readLine());
+    inputs = new int[size];
     st = new StringTokenizer(br.readLine());
-      
-    for (int i = 0; i < count; i++) {
-      values[i] = Integer.parseInt(st.nextToken());
-      findNGE(i);
+
+    for (int i = 0; st.hasMoreTokens(); i++) {
+      inputs[i] = Integer.parseInt(st.nextToken());
     }
     
-    sb = new StringBuilder();
+    CustomStack stack = new CustomStack(size);
 
-    while (stack.hasMoreElements()) {
-      values[stack.pop()] = - 1;
+    for (int i = 0; i < size; i++) {
+      while (!stack.isEmply() && inputs[stack.peek()] < inputs[i]) {
+        inputs[stack.pop()] = inputs[i];
+      }
+      stack.push(i);
     }
 
-    for (int value : values) {
-      sb.append(value).append(' ');
+    while (!stack.isEmply()) {
+      inputs[stack.pop()] = -1;
+    }
+
+    sb = new StringBuilder();
+    for (int i = 0; i < size; i++)  {
+      sb.append(inputs[i]).append(" ");
     }
 
     System.out.println(sb.toString());
     br.close();
   }
 
-  private static void findNGE(final int index) {
-    if (stack.size() == 0) {
-      stack.push(index);
-      return ;
-    }
-    
-    int currentValue = values[index];
-    int stackCapacity = stack.size();
+  static class CustomStack {
+    private int size;
+    private int index;
+    private int[] data;
 
-    for (int i = 1; i <= stackCapacity; i++) {
-      if (values[stack.peek()] < currentValue) {
-        values[index - i] = currentValue;
-        stack.pop();
+    CustomStack(final int size) {
+      this.size = size;
+      this.index = 0;
+      this.data = new int[size];
+    }
+
+    public int pop() {
+      if (isEmply()) {
+        return -1;
       }
+      return data[--index];
     }
 
-    stack.push(index);
-  }
-}
+    public int peek() {
+      if (isEmply()) {
+        return -1;
+      }
+      return data[index - 1];
+    }
 
-class CustomStack {
-  private int index;
-  private int[] values;
+    public void push(int value) {
+      if (isFull()) {
+        System.out.println("Stack is full...");
+        System.exit(0);
+      }
+      data[index++] = value;
+    }
 
-  CustomStack(final int size) {
-    this.index = 0;
-    this.values = new int[size];
-  }
+    public boolean isEmply() {
+      return index == 0;
+    }
 
-  public void push(int value) {
-    values[index++] = value;
-  }
+    public boolean isFull() {
+      return index == size;
+    }
 
-  public int pop() {
-    return values[--index];
-  }
-
-  public int peek() {
-    return values[index - 1];
-  }
-
-  public int size() {
-    return index;
-  }
-
-  public boolean hasMoreElements() {
-    return index != 0;
+    public int size() {
+      return index;
+    }
   }
 }

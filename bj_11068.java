@@ -9,16 +9,14 @@ public class bj_11068 {
 
     int count = Integer.parseInt(br.readLine());
     
-    
     for (int i = 0; i < count; i++) {
       int digit = Integer.parseInt(br.readLine());
       boolean ans = false;
 
       for (int j = 2; j <= 64; j++) {
-        int[] baseDigit = new int[20];
-        int baseLength = convertBase(digit, j, baseDigit);
+        int[] baseDigit = convertBase(digit, j);
   
-        if (isPalindrome(baseDigit, baseLength)) {
+        if (isPalindrome(baseDigit)) {
           ans = true;
           break;
         }
@@ -31,20 +29,30 @@ public class bj_11068 {
     br.close();
   }
 
-  static int convertBase(int x, int base, int[] reverseDigit) {
-    int len = 0;
+  static int[] convertBase(int x, int base) {
+    int len = 0, copyX = x;
+
+    while(copyX > 0) {
+      copyX /= base;
+      len++;
+    }
+
+    int[] baseDigit = new int[len];
+    len = 0;
 
     while(x > 0) {
-      reverseDigit[len++] = x % base;
+      baseDigit[len++] = x % base;
       x /= base;
     }
 
-    return len;
+    return baseDigit;
   }
 
-  static boolean isPalindrome(int[] digit, int length) {
-    for (int i = 0; i < length / 2; i++) {
-      if (digit[i] != digit[length - i - 1])
+  static boolean isPalindrome(int[] digit) {
+    int digitLength = digit.length;
+
+    for (int i = 0; i < digitLength / 2; i++) {
+      if (digit[i] != digit[digitLength - i - 1])
         return false;
     }
 

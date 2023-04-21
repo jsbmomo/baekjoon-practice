@@ -20,16 +20,20 @@ public class bj_10250 {
       int W = Integer.parseInt(st.nextToken());
       int N = Integer.parseInt(st.nextToken());
 
-      // 방법 2.
-      if (N % H == 0) {
-        floor = H * 100;
-        room = N / H;
-      } else {
-        floor = (N % H) * 100;
-        room = (N / H) + 1;
-      }
+      int distance = (N - 1) / H + 1;
+      int floor = (N - 1) % H + 1;
 
-      System.out.println((floor + room));
+
+      // 방법 2.
+      // if (N % H == 0) {
+      //   floor = H * 100;
+      //   room = N / H;
+      // } else {
+      //   floor = (N % H) * 100;
+      //   room = (N / H) + 1;
+      // }
+
+      System.out.printf("%d%02d\n", floor, distance);
       // 방법 1.
       // for (int j = 1; j <= W; j++) {
       //   for (int z = 1; z <= H; z++) {

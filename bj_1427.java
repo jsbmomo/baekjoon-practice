@@ -1,20 +1,19 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class bj_1427 {
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String input = br.readLine();
 
-    int[] values = new int[input.length];
+    int[] values = new int[input.length()];
 
-    for (int i = 0; i < input.length; i++) {
-      values[i] = Integer.parseInt(input.charAt(i));
+    for (int i = 0; i < input.length(); i++) {
+      values[i] = input.charAt(i) - '0';
     }
 
-    pivotSort(value, 0, values.length);
+    pivotSort(values, 0, values.length);
 
     StringBuilder sb = new StringBuilder();
 
@@ -31,7 +30,7 @@ public class bj_1427 {
   static void pivotSort(int[] ary, int low, int high) {
     if (low > high) return;
 
-    int pivot = partition;
+    int pivot = partition(ary, low, high);
 
     pivotSort(ary, low, pivot - 1);
     pivotSort(ary, pivot + 1, high);

@@ -10,16 +10,14 @@ public class bj_10989 {
     int[] ary = new int[10001];
 
     for (int i = 1; i <= count; i++) {
-      int input = Integer.parseInt(br.readLine());
-      ary[input]++;
+      ary[Integer.parseInt(br.readLine())]++;
     }
 
     StringBuilder sb = new StringBuilder();
 
     for (int i = 1; i < 10001; i++) {
-      while (ary[i] > 0) {
+      while (ary[i]-- > 0) {
         sb.append(i).append('\n');
-        i--;
       }
     }
 

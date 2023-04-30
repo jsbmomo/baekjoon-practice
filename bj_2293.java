@@ -4,9 +4,9 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class bj_2293 {
-  public static void main(String[] arg) {
-    BufferedReaber br = new BufferedReader(new InputStreamReader(System.in));
-    StringTokenizer st = new StringTokenizer();
+  public static void main(String[] arg) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
 
     int N = Integer.parseInt(st.nextToken());
     int K = Integer.parseInt(st.nextToken());
@@ -17,8 +17,6 @@ public class bj_2293 {
     for (int i = 0; i < N; i++) {
       coin[i] = Integer.parseInt(br.readLine());
     }
-
-    int case = 0;
 
     dp[0] = 1;
 

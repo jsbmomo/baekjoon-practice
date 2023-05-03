@@ -8,13 +8,11 @@ public class bj_4949 {
 
     StringBuilder result = new StringBuilder();
     String input = "";
-    boolean judge = false;
+    boolean judge = true;
 
     CustomStack stack = new CustomStack();
 
     while (!(input = br.readLine()).equals(".")) {
-      judge = true;
-
       for (char c : input.toCharArray()) {
         if (c == '(' || c == '[') {
           stack.push(c);
@@ -41,7 +39,7 @@ public class bj_4949 {
         }
       }
 
-      result.append(judge ? "yes\n" : "no\n");
+      result.append(stack.isEmply() && judge ? "yes\n" : "no\n");
       stack.clear();
     }
     
@@ -60,7 +58,7 @@ class CustomStack {
   }
 
   public char peek() {
-    return data[index - 1];
+    return data[index];
   }
 
   public char pop() {
@@ -68,7 +66,7 @@ class CustomStack {
   }
 
   public void push(char c) {
-    data[index++] = c;
+    data[++index] = c;
   }
 
   public boolean isEmply() {

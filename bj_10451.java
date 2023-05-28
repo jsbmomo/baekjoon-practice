@@ -3,6 +3,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/**
+ * 백준 10451 순열 사이클 
+ * 
+ * Reference : https://loosie.tistory.com/207
+ */
 public class bj_10451 {
   static int[] map;
   static boolean[] check;

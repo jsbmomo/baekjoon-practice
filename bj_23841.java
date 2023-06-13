@@ -1,53 +1,59 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class bj_23841 {
+  static BufferedReader br = null;
+  static StringTokenizer st = null;
+  static StringBuilder sb = null;
+
+  static int line;
+  static int ch;
+
+  static String[] inputs;
+
   public static void main(String[] args) throws IOException {
-    // 입력
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    String[] input01 = br.readLine().split(" ");
-    final int rows = Integer.parseInt(input01[0]);
-    final int cols = Integer.parseInt(input01[1]);
+    userInput();
+    System.out.println(solution());
+  }
 
-    char[][] picture = new char[rows][cols];
-    for (int i = 0; i < rows; i++) {
-        picture[i] = br.readLine().toCharArray();
+  static void userInput() throws IOException {
+    br = new BufferedReader(new InputStreamReader(System.in));
+    st = new StringTokenizer(br.readLine());
+
+    line = Integer.parseInt(st.nextToken());
+    ch = Integer.parseInt(st.nextToken());
+
+    inputs = new String[line];
+
+    for (int i = 0; i < line; i++) {
+      inputs[i] = br.readLine();
     }
 
-    //출력
-    System.out.print(solution(rows, cols, picture));
+    br.close();
+  }
 
-}
+  static String solution() {
+    StringBuilder result = new StringBuilder();
 
-private static String solution(int rows, int cols, char[][] picture) {
-    StringBuilder sb = new StringBuilder();
-    final int HalfCols = cols / 2;
+    for (String input : inputs) {
+      char[] decalcomanie = new char[input.length()];
 
-    for (int i = 0; i < rows; i++) {
-        StringBuilder sbBefore = new StringBuilder();
-        StringBuilder sbAfter = new StringBuilder();
-        for (int j = 0; j < HalfCols; j++) {
-            char curChar = picture[i][j];
-            char curCharMatch = picture[i][cols - j - 1];
-
-            if (curChar != curCharMatch) {
-                if (curChar == '.') {
-                    sbBefore.append(curCharMatch);
-                    sbAfter.insert(0, curCharMatch);
-                } else if (curCharMatch == '.') {
-                    sbBefore.append(curChar);
-                    sbAfter.insert(0, curChar);
-                }
-            } else {
-                sbBefore.append(curChar);
-                sbAfter.insert(0, curChar);
-            }
+      for (int i = 0; i < ch / 2; i++) {
+        if (input.charAt(i) != '.'  || input.charAt(input.length() - 1 - i) != '.') {
+          char c = input.charAt(i) == '.' ? input.charAt(input.length() - 1 - i) : input.charAt(i);
+          decalcomanie[i] = c;
+          decalcomanie[input.length() - 1 - i] = c;
+        } else {
+          decalcomanie[i] = '.';
+          decalcomanie[input.length() - 1 - i] = '.';
         }
-        sbBefore.append(sbBefore).append(sbAfter);
-        sb.append("\n");
+      }
+      
+      result.append(String.valueOf(decalcomanie)).append('\n');
     }
 
-    return sb.toString();
-}
+    return result.toString();
+  }
 }

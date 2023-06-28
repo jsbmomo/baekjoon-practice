@@ -3,10 +3,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class bj_25206 {
   static List<Subject> list = null;
   static BufferedReader br = null;
+  static StringTokenizer sb = null;
 
   public static void main(String[] args) throws IOException {
     inputs();
@@ -20,9 +22,9 @@ public class bj_25206 {
     list = new ArrayList<>();
 
     for (int i = 0; i < 20; i++) {
-      String[] inputStr = br.readLine().split(" ");
+      sb = new StringTokenizer(br.readLine());
 
-      list.add(new Subject(inputStr[0], Float.parseFloat(inputStr[1]), inputStr[2]));
+      list.add(new Subject(sb.nextToken(), sb.nextToken(), sb.nextToken()));
     }
 
     br.close();
@@ -33,11 +35,13 @@ public class bj_25206 {
     float divide = 0.0f;
 
     float point = 0.0f;
+    float scoreToFloat = 0.0f;
 
     for (Subject subject : list) {
       if ((point = swapGradeToPoint(subject.grade)) >= 0.0f) {
-        divide += subject.score;
-        sum += (point * subject.score);
+        scoreToFloat = Float.parseFloat(subject.score);
+        divide += scoreToFloat;
+        sum += (point * scoreToFloat);
       }
     }
 
@@ -73,10 +77,10 @@ public class bj_25206 {
 
 class Subject {
   String name;
-  float score;
+  String score;
   String grade;
 
-  public Subject(String name, float score, String grade) {
+  public Subject(String name, String score, String grade) {
     this.name = name;
     this.score = score;
     this.grade = grade;

@@ -33,17 +33,17 @@ public class bj_10451 {
 
   static void solustion() throws IOException {
     T = Integer.parseInt(br.readLine());
-    N = new int[T];
+    N = new int[T + 1];
     cycle = 0;
-    visit = new boolean[T];
+    visit = new boolean[T + 1];
 
     StringTokenizer st = new StringTokenizer(br.readLine());
 
-    for (int i = 0; i < T; i++) {
+    for (int i = 1; i <= T; i++) {
       N[i] = Integer.parseInt(st.nextToken());
     }
 
-    for (int i = 0; i < T; i++) {
+    for (int i = 1; i <= T; i++) {
       if (!visit[i]) {
         dfs(i);
         cycle++;

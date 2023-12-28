@@ -9,47 +9,57 @@ import java.util.StringTokenizer;
  * Reference : https://loosie.tistory.com/207
  */
 public class bj_10451 {
-  static int[] map;
-  static boolean[] check;
-  static int cycle;
+  static BufferedReader br = null;
+  static StringBuilder result = null;
 
-  public static void main(String[] args) throws NumberFormatException, IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    StringTokenizer st = null;
+  public static void main(String[] args) throws IOException {
+    br = new BufferedReader(new InputStreamReader(System.in));
+    result = new StringBuilder();
+    
+    final int testCase = Integer.parseInt(br.readLine());
 
-    int counter = Integer.parseInt(br.readLine());
-
-    for (int test = 0; test < counter; test++) {
-      int num = Integer.parseInt(br.readLine());
-      map = new int[num + 1];
-      cycle = 0;
-
-      st = new StringTokenizer(br.readLine());
-
-      for (int i = 1; i < num + 1; i++ ){
-        map[i] = Integer.parseInt(st.nextToken());
-      }
-
-      check = new boolean[num + 1];
-
-      for (int i = 1; i < num + 1; i++) {
-        if (!check[i]) {
-          customDFS(i);
-          cycle++;
-        }
-      }
-
-      System.out.println(cycle);
+    for (int i = 0; i < testCase; i++) {
+      solustion();
     }
+
+    System.out.print(result.toString());
+    br.close();
   }
 
-  static void customDFS(int start) {
-    check[start] = true;
+  static int T;
+  static int[] N;
+  static int cycle;
+  static boolean[] visit;
 
-    int next = map[start];
+  static void solustion() throws IOException {
+    T = Integer.parseInt(br.readLine());
+    N = new int[T];
+    cycle = 0;
+    visit = new boolean[T];
 
-    if (!check[next]) {
-      customDFS(map[start]);
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    for (int i = 0; i < T; i++) {
+      N[i] = Integer.parseInt(st.nextToken());
+    }
+
+    for (int i = 0; i < T; i++) {
+      if (!visit[i]) {
+        dfs(i);
+        cycle++;
+      }
+    }
+
+    result.append(cycle).append("\n");
+  }
+
+  static void dfs(int index) {
+    visit[index] = true;
+
+    int next = N[index];
+
+    if (!visit[next]) {
+      dfs(next);
     }
   }
 }

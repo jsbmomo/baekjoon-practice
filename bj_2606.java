@@ -1,39 +1,42 @@
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 public class bj_2606 {
-  static int map[][];
-  static boolean visit[];
-  static int n, m, v;
-  static int count = 0;
+  static int pcCount;
+  static int connected;
+  static int result = 0;
+  static int[][] pc;
+  static boolean[] infected;
+  static final int virus = 1;
 
   public static void main(String[] args) throws IOException {
-    Scanner sc = new Scanner(System.in);
-    n = sc.nextInt();
-    m = sc.nextInt();
-    v = 1;
-    map = new int[n + 1][n + 1];
-    visit = new boolean[n + 1];
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    for (int i = 0; i < m; i++) {
-      int a = sc.nextInt();
-      int b = sc.nextInt();
-      map[a][b] = map[b][a] = 1;
+    pcCount = Integer.parseInt(br.readLine());
+    connected = Integer.parseInt(br.readLine());
+
+    pc = new int[pcCount + 1][2];
+    infected = new boolean[pcCount + 1];
+
+    for (int i = 1; i <= connected; i++) {
+      String[] str = br.readLine().split(" ");
+      pc[i][0] = Integer.parseInt(str[0]);
+      pc[i][1] = Integer.parseInt(str[1]);
     }
 
-    System.out.println(dfs(1));
-    sc.close();
+    dfs(virus);
+
+    System.out.println(result);
+    br.close();
   }
 
-  public static int dfs(int i) {
-    visit[i] = true;
+  static void dfs(int pcName) {
+    infected[pcName] = true;
+    result++;
 
-    for (int j = 1; j <= n; j++) {
-      if (map[i][j] == 1 && visit[j] == false) {
-        count++;
-        dfs(j);
-      }
+    for (int i = 1; i <= pcCount; i++) {
+      if (pc[pcName][0] == 1 && !infected[i]) dfs(i);
     }
-    return count;
   }
 }

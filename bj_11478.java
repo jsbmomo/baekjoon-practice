@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class bj_11478 {
   public static void main(String[] args) throws IOException {
@@ -10,22 +10,20 @@ public class bj_11478 {
     final String str = br.readLine();
     final int len = str.length();
 
-    int count = 0;
-
-    HashMap<String, String> map = new HashMap<>();
+    HashSet<String> hash = new HashSet<>();
 
     for (int i = 1; i <= len; i++) {
-      for (int j = 0; j < len - i + 1; j++) {
+      for (int j = 0; j <= len - i; j++) {
         String newStr = str.substring(j, j + i);
         
-        if (!map.containsKey(newStr)) {
-          map.put(newStr, newStr);
-          count++;
+        if (!hash.contains(newStr)) {
+          hash.add(newStr);
         }
       }
     }
 
-    System.out.println(count);
+    System.out.println(hash.size());
+
     br.close();
   }
 }

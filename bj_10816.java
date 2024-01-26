@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -10,9 +11,77 @@ public class bj_10816 {
   static int[] compareNums;
   static Map<Integer, Integer> cards;
 
+  static int[] aryN;
+  static int[] aryM;
+
   public static void main(String[] args) throws IOException {
-    inputs();
-    solution();
+    // inputs();
+    // solution();
+    inputs2();
+    solution2();
+  }
+
+  static void solution2() {
+    Arrays.sort(aryN);
+  
+    StringBuilder sb = new StringBuilder();
+
+    for (int i = 0; i < M; i++) {
+      sb.append(upperSearch(aryN[i]) - lowerSearch(aryN[i])).append(' ');
+    }
+
+    System.out.println(sb.toString());
+  }
+
+  static void inputs2() throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st;
+
+    N = Integer.parseInt(br.readLine());
+
+    aryN = new int[N];
+    st = new StringTokenizer(br.readLine());
+
+    for (int i = 0; i < N; i++) {
+      aryN[i] = Integer.parseInt(st.nextToken());
+    }
+
+    M = Integer.parseInt(br.readLine());
+
+    aryM = new int[M];
+    st = new StringTokenizer(br.readLine());
+
+    for (int i = 0; i < M; i++) {
+      aryM[i] = Integer.parseInt(st.nextToken());
+    }
+
+    br.close();
+  }
+
+  static int upperSearch(int target) {
+    int left = 0, right = aryM.length;
+
+    while (left < right) {
+      int mid = (left + right) / 2;
+
+      if (target <= aryM[mid]) right = mid;
+      else left = mid + 1;
+    }
+
+    return left;
+  }
+
+  static int lowerSearch(int target) {
+    int left = 0, right = aryM.length;
+
+    while (left < right) {
+      int mid = (left + right) / 2;
+
+      if (target <= aryM[mid]) right = mid;
+      else left = mid + 1;
+    }
+
+    return left;
   }
 
   static void solution() {
@@ -26,6 +95,7 @@ public class bj_10816 {
 
     System.out.println(sb.toString());
   }
+
 
   static void inputs() throws IOException {
     cards = new HashMap<>();

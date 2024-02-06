@@ -13,14 +13,15 @@ public class bj_11659 {
     int M = Integer.parseInt(st.nextToken());
 
     int[] aryN = new int[N + 1];
-    st = new StringTokenizer(br.readLine());
 
-    for (int i = 1; st.hasMoreTokens(); i++) {
-      aryN[i] = Integer.parseInt(st.nextToken());
+    st = new StringTokenizer(br.readLine());
+    aryN[1] = Integer.parseInt(st.nextToken());
+
+    for (int i = 2; st.hasMoreTokens(); i++) {
+      aryN[i] += aryN[i - 1] + Integer.parseInt(st.nextToken());
     }
 
     StringBuilder sb = new StringBuilder();
-    int sum;
 
     for (int count = 0; count < M; count++) {
       st = new StringTokenizer(br.readLine());
@@ -28,13 +29,7 @@ public class bj_11659 {
       int i = Integer.parseInt(st.nextToken());
       int j = Integer.parseInt(st.nextToken());
 
-      sum = 0;
-
-      for (int range = i; range <= j; range++) {
-        sum += aryN[range];
-      }
-
-      sb.append(sum).append('\n');
+      sb.append(aryN[j] - aryN[i - 1]).append('\n');
     }
 
     System.out.println(sb.toString());

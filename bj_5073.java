@@ -34,7 +34,6 @@ public class bj_5073 {
         continue;
       }
 
-      // if ((a != b) && (b != c) && (c != a))
       sb.append("Scalene").append('\n');
     }
 

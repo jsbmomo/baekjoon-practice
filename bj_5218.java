@@ -30,7 +30,12 @@ public class bj_5218 {
       sb.append(prefix);
 
       for (int j = 0; j < len; j++) {
-        sb.append(s2.charAt(j) - s1.charAt(j)).append(' ');
+        char a = s1.charAt(j);
+        char b = s2.charAt(j);
+
+        int diff = b >= a ? b - a : (b + 26) - a;
+
+        sb.append(diff).append(' ');
       }
 
       sb.append('\n');

@@ -3,15 +3,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 
 public class bj_1764 {
   
   static int N, M;
-  static Map<String, Integer> person;
+  static List<String> unknown;
 
   public static void main(String[] args) throws IOException {
     inputs();
@@ -19,18 +20,15 @@ public class bj_1764 {
   } 
 
   private static void solution() {
-    ArrayList<String> list = new ArrayList<>(person.keySet()) ;
     StringBuilder sb = new StringBuilder();
 
-    Collections.sort(list);
+    Collections.sort(unknown);
 
-    for (String key : list) {
-      if (person.get(key) >= 2) {
-        sb.append(key).append('\n');
-      }
+    for (String s : unknown) {
+      sb.append(s).append('\n');
     }
 
-    System.out.println(list.size());
+    System.out.println(unknown.size());
     System.out.println(sb.toString());
   }
 
@@ -41,16 +39,18 @@ public class bj_1764 {
     N = Integer.parseInt(st.nextToken());
     M = Integer.parseInt(st.nextToken());
 
-    final int sum = N + M;
-    person = new HashMap<>();
+    Set<String> person = new HashSet<>();
+    unknown = new ArrayList<>();
 
-    for (int i = 0; i < sum; i++) {
-      String str = br.readLine();
+    for (int i = 0; i < N; i++) {
+      person.add(br.readLine());
+    }
 
-      if (person.containsKey(str)) {
-        person.put(str, person.get(str) + 1);
-      } else {
-        person.put(str, 1);
+    for (int i = 0; i < M; i++) {
+      String s = br.readLine();
+
+      if (person.contains(s)) {
+        unknown.add(s);
       }
     }
 

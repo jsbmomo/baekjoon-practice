@@ -8,7 +8,12 @@ public class bj_11382 {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringTokenizer st = new StringTokenizer(br.readLine());
 
-    System.out.println(Integer.parseInt(st.nextToken()) + Integer.parseInt(st.nextToken()) + Integer.parseInt(st.nextToken()));
+    // 10의 12승이 값으로 들어옴!
+    System.out.println(
+      Long.parseLong(st.nextToken()) + 
+      Long.parseLong(st.nextToken()) + 
+      Long.parseLong(st.nextToken())
+    );
 
     br.close();
   }

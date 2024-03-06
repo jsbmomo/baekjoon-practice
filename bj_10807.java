@@ -4,35 +4,32 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class bj_10807 {
+
+  static int N, V;
+  static StringTokenizer st;
+
   public static void main(String[] args) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    String temp = br.readLine();
-    int count = Integer.parseInt(temp.substring(0, temp.length() - 1));
-    int result = 0;
+    inputs();
+    solutions();
+  }
 
-    StringTokenizer st = new StringTokenizer(br.readLine());
-    temp = br.readLine();
+  private static void solutions() {
+    int count = 0;
 
-    String target = temp.substring(0);
-
-    while (st.hasMoreTokens()) {
-      if (target.equals(st.nextToken())) {
-        result++;
-      }
+    while(st.hasMoreTokens()) {
+      if (Integer.parseInt(st.nextToken()) == V) count++;
     }
 
-    // String[] values = br.readLine().split(" ");
-    // temp = br.readLine();
+    System.out.println(count);
+  }
 
-    // String target = temp.substring(0);
-    // for (String value : values) {
-    //   System.out.println(value + "  " + target);
-    //   if (value.equals(target)) {
-    //     result++;
-    //   }
-    // }
-    
-    System.out.println(result);
+  private static void inputs() throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    N = Integer.parseInt(br.readLine());
+    st = new StringTokenizer(br.readLine());
+    V = Integer.parseInt(br.readLine());
+
     br.close();
   }
 }

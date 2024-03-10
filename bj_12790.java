@@ -15,17 +15,25 @@ public class bj_12790 {
     for (int i = 0; i < T; i++) {
       st = new StringTokenizer(br.readLine());
 
-      int HP = Integer.parseInt(st.nextToken());
-      int MP = Integer.parseInt(st.nextToken());
-      int ATTACK = Integer.parseInt(st.nextToken());
-      int DEFENSE = Integer.parseInt(st.nextToken());
+      int[] values = new int[8];
 
-      int appendHP = HP + Integer.parseInt(st.nextToken());
-      int appendMP = MP + Integer.parseInt(st.nextToken());
-      int appendAttack = ATTACK + Integer.parseInt(st.nextToken());
-      int appendDefence = DEFENSE + Integer.parseInt(st.nextToken());
+      for (int j = 0; st.hasMoreTokens(); j++) {
+        values[j] = Integer.parseInt(st.nextToken());
+      }
 
-      int result = checkHP(HP, appendHP) * 1 + checkMP(MP, appendMP) * 5 + checkATTACK(ATTACK, appendAttack) * 2 + (DEFENSE + appendDefence) * 2;
+      // int HP = Integer.parseInt(st.nextToken());
+      // int MP = Integer.parseInt(st.nextToken());
+      // int ATTACK = Integer.parseInt(st.nextToken());
+      // int DEFENSE = Integer.parseInt(st.nextToken());
+
+      // int appendHP = HP + Integer.parseInt(st.nextToken());
+      // int appendMP = MP + Integer.parseInt(st.nextToken());
+      // int appendAttack = ATTACK + Integer.parseInt(st.nextToken());
+      // int appendDefence = DEFENSE + Integer.parseInt(st.nextToken());
+
+      // int result = checkHP(HP, appendHP) * 1 + checkMP(MP, appendMP) * 5 + checkATTACK(ATTACK, appendAttack) * 2 + (DEFENSE + appendDefence) * 2;
+
+      int result = checkHP(values[0], values[4]) * 1 + checkMP(values[1], values[5]) * 5 + checkATTACK(values[2], values[6]) * 2 + (values[3] + values[7]) * 2;
 
       sb.append(result).append('\n');
     }

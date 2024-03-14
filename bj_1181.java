@@ -2,19 +2,41 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
 
 public class bj_1181 {
   static int count;
   static String[] words;
 
+  static Map<String, Integer> map;
+
   public static void main(String[] args) throws IOException {
     inputs();
     solution();
+    print();
   }
 
   static void solution() {
-    Arrays.sort(words);
+    Arrays.sort(words, new Comparator<String>() {
+      public int compare(String s1, String s2) {
+        if (s1.length() == s2.length()) return s1.compareTo(s2);
+        else return s1.length() - s2.length();
+      }
+    });
 
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(words[0]).append('\n');
+
+    for (int i = 1; i < count; i++) {
+      if (!words[i].equals(words[i - 1])) sb.append(words[i]).append('\n');
+    }
+  }
+
+  static void print() {
     StringBuilder sb = new StringBuilder();
 
     for (String word : words) {

@@ -11,12 +11,9 @@ public class bj_1181 {
   static int count;
   static String[] words;
 
-  static Map<String, Integer> map;
-
   public static void main(String[] args) throws IOException {
     inputs();
     solution();
-    print();
   }
 
   static void solution() {
@@ -33,14 +30,6 @@ public class bj_1181 {
 
     for (int i = 1; i < count; i++) {
       if (!words[i].equals(words[i - 1])) sb.append(words[i]).append('\n');
-    }
-  }
-
-  static void print() {
-    StringBuilder sb = new StringBuilder();
-
-    for (String word : words) {
-      sb.append(word).append('\n');
     }
 
     System.out.println(sb.toString());

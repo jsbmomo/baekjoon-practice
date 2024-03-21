@@ -8,6 +8,7 @@ public class bj_15658 {
   static int N;
   static int[] nums;
   static int[] oper;
+  static int max = Integer.MAX_VALUE, min = Integer.MIN_VALUE;
 
   public static void main(String[] args) throws IOException {
     inputs();
@@ -15,24 +16,39 @@ public class bj_15658 {
   }
 
   private static void solution() {
-    int max = 0;
-    int min = Integer.MAX_VALUE;
+    dfs(1, nums[0]);
 
-    for (int i = 0; i < N; i++) {
-      if (oper[0] > 0) {
-        oper[0] --;
-      }
+    System.out.println(max);
+    System.out.println(min);
+  }
 
-      if (oper[1] > 0) {
-        oper[1] --;
-      }
+  private static void dfs(int count, int value) {
+    if (value == N) {
+      max = Math.max(value, max);
+      min = Math.min(value, min);
+      return ;
+    }
 
-      if (oper[2] < 0) {
-        oper[2] --;
-      }
+    for (int i = 0; i < 4; i++) {
+      if (oper[i] > 0) {
+        oper[i] -= 1;
 
-      if (oper[3] > 0) {
-        oper[3] --;
+        switch (i) {
+          case 0:
+            dfs(count + 1, value + nums[count]);
+            break;
+          case 1:
+            dfs(count + 1, value - nums[count]);
+            break;
+          case 2:
+            dfs(count + 1, value * nums[count]);
+            break;
+          case 3:
+            dfs(count + 1, value / nums[count]);
+            break;
+        }
+
+        oper[i] += 1;
       }
     }
   }
